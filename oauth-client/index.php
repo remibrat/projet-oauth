@@ -25,7 +25,7 @@ function home()
     $oAuth2SDK =  new OAuth2SDK('http://localhost:7071');
 
     foreach ($oAuth2SDK->getProviders() as $provider)
-        echo '<a href="' . $provider->getLink() . '">Se connecter via OauthServer</a>';
+        echo '<a href="' . $provider->getLink() . '">Se connecter via ' . $provider->getProviderName() . '</a>';
 }
 
 function callback()

@@ -23,14 +23,15 @@ class OAuth2SDK
 
         $providersArray = include __DIR__ . DIRECTORY_SEPARATOR . 'provider_config.php';
 
-        $this->providers = array_map(function ($providerArray) use ($localUrl) {
+        $this->providers = array_map(function (string $providerName, array $providerArray) use ($localUrl) {
             return new $providerArray['class_name'](
+                $providerName,
                 $providerArray['client_id'],
                 $providerArray['client_secret'],
                 $providerArray['state'],
                 $providerArray['link'],
                 $localUrl,
             );
-        }, $providersArray);
+        }, array_keys($providersArray), $providersArray);
     }
 }

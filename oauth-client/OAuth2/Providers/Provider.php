@@ -4,6 +4,8 @@ namespace OAuth2\Providers;
 
 abstract  class Provider
 {
+    protected string $providerName;
+
     protected string $clientID;
 
     protected string $clientSecret;
@@ -12,10 +14,11 @@ abstract  class Provider
 
     protected string $localUrl;
 
-    protected string $link = 'dd';
+    protected string $link;
 
-    public function __construct($clientID, $clientSecret, $state, $link, $localUrl)
+    public function __construct(string $providerName, string $clientID, string $clientSecret, string $state, string $link, string $localUrl)
     {
+        $this->providerName = $providerName;
         $this->clientID = $clientID;
         $this->clientSecret = $clientSecret;
         $this->state = $state;
@@ -27,6 +30,11 @@ abstract  class Provider
     public function getLink(): string
     {
         return $this->link;
+    }
+
+    public function getProviderName(): string
+    {
+        return $this->providerName;
     }
 
     protected function setLink(string $link): Provider

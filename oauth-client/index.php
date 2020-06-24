@@ -2,8 +2,8 @@
 
 use OAuth2\OAuth2SDK;
 
-$CLIENT_ID = "client_5edfd43b0db573.88203718";
-$CLIENT_SECRET = "e0a6a1f5c55fafd48cbcce2b7279d4029fad76f4";
+$CLIENT_ID = "client_5ef37f10e42cf8.67246672";
+$CLIENT_SECRET = "ad67ccac33fb8731ea84378f58035bd8d76b4cfb";
 $STATE = "DEAZFAEF321432DAEAFD3E13223R";
 $LOCAL_URL = "http://localhost:7071";
 
@@ -65,7 +65,7 @@ switch ($route) {
     case '/':
         home();
         break;
-    case '/success':
+    case '/success/oauth':
         callback();
         break;
 }

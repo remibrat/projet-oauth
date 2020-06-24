@@ -39,7 +39,7 @@ abstract  class Provider
 
     protected function setLink(string $link): Provider
     {
-        $link = preg_replace('/\{LOCAL_URL\}/', $this->localUrl, $link);
+        $link = preg_replace('/\{SUCCESS_URL\}/', $this->localUrl . '/success/' . $this->providerName, $link);
         $link = preg_replace('/\{STATE\}/', $this->state, $link);
         $this->link = preg_replace('/\{CLIENT_ID\}/', $this->clientID, $link);
 

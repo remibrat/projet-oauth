@@ -25,11 +25,12 @@ function home()
     $oAuth2SDK =  new OAuth2SDK('http://localhost:7071');
 
     foreach ($oAuth2SDK->getProviders() as $provider)
-        echo '<a href="' . $provider->getLink() . '">Se connecter via ' . $provider->getProviderName() . '</a>';
+        echo '<a href="' . $provider->getAuthLink() . '">Se connecter via ' . $provider->getProviderName() . '</a>';
 }
 
-function callback()
+function callback(string $providerName)
 {
+    $oAuth2SDK =  new OAuth2SDK('http://localhost:7071');
     global $STATE;
     global $CLIENT_ID;
     global $CLIENT_SECRET;
@@ -66,6 +67,6 @@ switch ($route) {
         home();
         break;
     case '/success/oauth':
-        callback();
+        callback('oauth');
         break;
 }

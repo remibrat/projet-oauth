@@ -14,9 +14,9 @@ abstract  class Provider
 
     protected string $localUrl;
 
-    protected string $link;
+    protected string $authLink;
 
-    public function __construct(string $providerName, string $clientID, string $clientSecret, string $state, string $link, string $localUrl)
+    public function __construct(string $providerName, string $clientID, string $clientSecret, string $state, string $authLink, string $callbackLink, string $localUrl)
     {
         $this->providerName = $providerName;
         $this->clientID = $clientID;
@@ -24,12 +24,12 @@ abstract  class Provider
         $this->state = $state;
         $this->localUrl = $localUrl;
 
-        $this->setLink($link);
+        $this->setAuthLink($authLink);
     }
 
-    public function getLink(): string
+    public function getAuthLink(): string
     {
-        return $this->link;
+        return $this->authLink;
     }
 
     public function getProviderName(): string
@@ -37,11 +37,11 @@ abstract  class Provider
         return $this->providerName;
     }
 
-    protected function setLink(string $link): Provider
+    protected function setAuthLink(string $link): Provider
     {
         $link = preg_replace('/\{SUCCESS_URL\}/', $this->localUrl . '/success/' . $this->providerName, $link);
         $link = preg_replace('/\{STATE\}/', $this->state, $link);
-        $this->link = preg_replace('/\{CLIENT_ID\}/', $this->clientID, $link);
+        $this->authLink = preg_replace('/\{CLIENT_ID\}/', $this->clientID, $link);
 
         return $this;
     }

@@ -25,6 +25,7 @@ return [
         'client_secret' => 'ad67ccac33fb8731ea84378f58035bd8d76b4cfb',
         'state' => 'DEAZFAEF321432DAEAFD3E13223R',
         'auth_link' => 'http://localhost:7070/auth?response_type=code&client_id={CLIENT_ID}&state={STATE}&scope=email&redirect_uri={SUCCESS_URL}',
-        'callback_link' => 'http://oauth-server/token?grant_type=authorization_code&code={$code}&client_id={$CLIENT_ID}&client_secret={$CLIENT_SECRET}'
+        'callback_link' => 'http://oauth-server/token?grant_type=authorization_code&code={CODE}&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}',
+        'me_link' => 'http://oauth-server/me',
     ],
 ];

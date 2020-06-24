@@ -2,6 +2,8 @@
 
 namespace OAuth2;
 
+use OAuth2\Providers\Provider;
+
 class OAuth2SDK
 {
     protected array $providers;
@@ -14,6 +16,15 @@ class OAuth2SDK
     public function getProviders(): array
     {
         return $this->providers;
+    }
+
+    public function getProvider(string $providerName): ?Provider
+    {
+        foreach ($this->providers as $provider)
+            if ($provider->getProviderName() === $providerName)
+                return $provider;
+
+        return null;
     }
 
     protected function loadProviders($localUrl): void
@@ -31,6 +42,7 @@ class OAuth2SDK
                 $providerArray['state'],
                 $providerArray['auth_link'],
                 $providerArray['callback_link'],
+                $providerArray['me_link'],
                 $localUrl,
             );
         }, array_keys($providersArray), $providersArray);

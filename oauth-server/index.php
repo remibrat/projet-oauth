@@ -173,7 +173,8 @@ function exchangeAuthorizationCodeToToken(string $client_id, $code)
     if (false !== $code && $code['expireDate'] > new DateTime()) {
         // Generate token and its expiration Date
         $token = uniqid("", true);
-        $expireDate = new DateTime('+ 3600 seconds');
+        //TODO : remettre 3600
+        $expireDate = new DateTime('+ 3600000000000 seconds');
         // Save them into the database
         $data = read_file('./data/token.data');
         $data[] =

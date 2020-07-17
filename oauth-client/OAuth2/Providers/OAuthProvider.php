@@ -4,31 +4,26 @@ namespace OAuth2\Providers;
 
 class OAuthProvider extends Provider
 {
-    protected function getUserInformations(): array
+    protected function mapUserInformations(array $userInformations): array
     {
-        //TODO : Faire un truc plus propre
-        ['code' => $this->code, 'state' => $rstate] = $_GET;
+        return [
+            'id' => $userInformations['user_id'],
+            'login' => $userInformations['email']
+        ];
+    }
 
-        if ($rstate !== $this->state)
-            return [];
+    protected function getAuthLink(): string
+    {
+        return 'http://localhost:7070/auth?response_type=code&client_id={CLIENT_ID}&state={STATE}&scope=email&redirect_uri={SUCCESS_URL}';
+    }
 
-        $this->setCallbackLink();
+    protected function getCallbackLink(): string
+    {
+        return 'http://oauth-server/token?grant_type=authorization_code&code={CODE}&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}';
+    }
 
-        ['token' => $token] = json_decode(file_get_contents($this->callbackLink), true);
-
-        // Get user data
-        $link = "http://oauth-server/me";
-        $rs = curl_init($this->meLink);
-        curl_setopt_array($rs, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER => 0,
-            CURLOPT_HTTPHEADER => [
-                "Authorization: Bearer {$token}"
-            ]
-        ]);
-        $userInformationsArray = json_decode(curl_exec($rs), JSON_OBJECT_AS_ARRAY);
-        curl_close($rs);
-
-        return $userInformationsArray;
+    protected function getMeLink(): string
+    {
+        return 'http://oauth-server/me';
     }
 }

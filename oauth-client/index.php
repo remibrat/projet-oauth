@@ -25,7 +25,7 @@ function home()
     $oAuth2SDK =  new OAuth2SDK('http://localhost:7071');
 
     foreach ($oAuth2SDK->getProviders() as $provider)
-        echo '<a href="' . $provider->getAuthLink() . '">Se connecter via ' . $provider->getProviderName() . '</a>';
+        echo '<a href="' . $provider->getMappedAuthLink() . '">Se connecter via ' . $provider->getProviderName() . '</a><br>';
 }
 
 function callback(string $providerName)
@@ -52,5 +52,11 @@ switch ($route) {
         break;
     case '/success/oauth':
         callback('oauth');
+        break;
+    case '/success/github':
+        callback('github');
+        break;
+    case '/success/facebook':
+        callback('facebook');
         break;
 }

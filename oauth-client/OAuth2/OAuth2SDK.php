@@ -39,10 +39,6 @@ class OAuth2SDK
                 $providerName,
                 $providerArray['client_id'],
                 $providerArray['client_secret'],
-                $providerArray['state'],
-                $providerArray['auth_link'],
-                $providerArray['callback_link'],
-                $providerArray['me_link'],
                 $localUrl,
             );
         }, array_keys($providersArray), $providersArray);
